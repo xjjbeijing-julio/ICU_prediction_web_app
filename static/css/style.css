@@ -1,0 +1,238 @@
+/* ================================================================
+   ICU-LNN 死亡风险预测系统 — 临床医疗风格
+   ================================================================ */
+
+:root {
+  --bg: #f0f4f8;
+  --surface: #ffffff;
+  --primary: #2563eb;
+  --primary-light: #dbeafe;
+  --danger: #ef4444;
+  --danger-light: #fef2f2;
+  --warning: #f59e0b;
+  --warning-light: #fffbeb;
+  --success: #22c55e;
+  --success-light: #f0fdf4;
+  --text: #1e293b;
+  --text-secondary: #64748b;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.08), 0 4px 6px -4px rgba(0,0,0,.05);
+  --radius: 10px;
+  --radius-sm: 6px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+               "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- 顶部导航 ---- */
+.topbar {
+  background: linear-gradient(135deg, #1e3a5f 0%, #1a56db 100%);
+  color: #fff;
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  position: sticky; top: 0; z-index: 100;
+}
+.topbar-inner {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%; max-width: 1440px; margin: 0 auto;
+}
+.logo { font-size: 20px; font-weight: 700; letter-spacing: -.5px; }
+.subtitle { font-size: 14px; opacity: .85; flex: 1; }
+.badge {
+  background: rgba(255,255,255,.2);
+  padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600;
+}
+
+/* ---- 主布局 ---- */
+.main-container {
+  display: flex; gap: 24px; padding: 24px;
+  max-width: 1440px; margin: 0 auto;
+  min-height: calc(100vh - 56px - 60px);
+}
+.input-panel { flex: 1; max-width: 560px; min-width: 400px; }
+.result-panel { flex: 1.2; min-width: 450px; }
+
+/* ---- 面板通用 ---- */
+.panel-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px; flex-wrap: wrap;
+}
+.panel-header h2 { font-size: 18px; font-weight: 700; }
+.required-hint { font-size: 12px; color: var(--text-secondary); }
+
+/* ---- 输入面板 ---- */
+.input-panel {
+  background: var(--surface); border-radius: var(--radius);
+  padding: 20px; box-shadow: var(--shadow); overflow-y: auto;
+}
+
+.feature-group {
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 14px; margin-bottom: 14px;
+}
+.feature-group legend {
+  font-weight: 700; font-size: 14px; padding: 0 8px; color: var(--primary);
+}
+
+.input-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px;
+}
+.input-item { display: flex; flex-direction: column; gap: 3px; }
+.input-item label {
+  font-size: 12px; font-weight: 600; color: var(--text-secondary);
+}
+.input-item input, .input-item select {
+  padding: 8px 10px; border: 1px solid var(--border);
+  border-radius: var(--radius-sm); font-size: 14px;
+  transition: border-color .15s, box-shadow .15s;
+  background: #fafbfc; font-family: inherit;
+}
+.input-item input:focus, .input-item select:focus {
+  outline: none; border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+/* ---- 按钮 ---- */
+.btn-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+.btn {
+  padding: 10px 18px; border: none; border-radius: var(--radius-sm);
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  transition: all .15s; font-family: inherit;
+}
+.btn-primary {
+  background: var(--primary); color: #fff; flex: 1;
+  min-width: 160px;
+}
+.btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+.btn-secondary { background: #f1f5f9; color: var(--text); }
+.btn-secondary:hover { background: #e2e8f0; }
+.btn-outline {
+  background: #fff; border: 1px solid var(--border); color: var(--text-secondary);
+  font-size: 12px; padding: 8px 12px;
+}
+.btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+/* ---- 结果面板 ---- */
+.result-panel {
+  background: var(--surface); border-radius: var(--radius);
+  padding: 20px; box-shadow: var(--shadow);
+}
+
+.empty-state, .loading-state, .error-state {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 60px 20px; text-align: center;
+}
+.empty-icon { font-size: 64px; margin-bottom: 16px; }
+.empty-state h3 { font-size: 16px; color: var(--text-secondary); margin-bottom: 8px; }
+.empty-state p { font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+
+.model-info-cards { display: flex; gap: 12px; margin-top: 20px; }
+.info-card {
+  flex: 1; background: #f8fafc; border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 14px; text-align: left;
+}
+.info-card .info-icon { font-size: 24px; }
+.info-card strong { display: block; font-size: 13px; margin: 4px 0; }
+.info-card p { font-size: 12px; color: var(--text-secondary); }
+
+/* ---- 预测结果 ---- */
+.risk-gauge-container {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 10px 0; position: relative;
+}
+.risk-percentage { font-size: 48px; font-weight: 800; letter-spacing: -2px; margin-top: -10px; }
+.risk-label { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+
+.risk-details { margin-top: 16px; }
+.detail-card {
+  padding: 14px; border-radius: var(--radius-sm); text-align: center;
+  margin-bottom: 12px;
+}
+.detail-card h4 { font-size: 15px; }
+
+.interpretation-box {
+  background: #f8fafc; border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 14px; margin-bottom: 12px;
+}
+.interpretation-box h4 { font-size: 14px; margin-bottom: 8px; }
+.interpretation-box ul { padding-left: 18px; }
+.interpretation-box li { font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; line-height: 1.5; }
+
+.model-comparison { margin-top: 12px; }
+.model-comparison h4 { font-size: 14px; margin-bottom: 8px; }
+.comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.comp-card {
+  padding: 12px; border-radius: var(--radius-sm);
+  background: #f8fafc; border: 1px solid var(--border);
+  text-align: center;
+}
+.comp-header { font-size: 12px; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px; }
+.comp-value { font-size: 28px; font-weight: 800; }
+.comp-meta { font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
+
+.action-box {
+  padding: 14px; border-radius: var(--radius-sm); margin-top: 12px;
+  background: var(--primary-light); border: 1px solid #bfdbfe;
+}
+.action-box h4 { font-size: 14px; margin-bottom: 6px; }
+.action-box p { font-size: 13px; }
+
+/* ---- 加载动画 ---- */
+.spinner {
+  width: 40px; height: 40px; border: 3px solid var(--border);
+  border-top-color: var(--primary); border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-state p { margin-top: 12px; font-size: 14px; color: var(--text-secondary); }
+
+/* ---- 错误状态 ---- */
+.error-icon { font-size: 48px; margin-bottom: 8px; }
+.error-state h4 { color: var(--danger); margin-bottom: 4px; }
+.error-state p { font-size: 13px; color: var(--text-secondary); }
+
+/* ---- 底部 ---- */
+.footer {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 24px; font-size: 11px; color: var(--text-secondary);
+  background: #fff; border-top: 1px solid var(--border);
+  flex-wrap: wrap; gap: 8px;
+}
+
+.model-badge {
+  font-size: 11px; padding: 3px 10px; border-radius: 10px;
+  background: var(--primary-light); color: var(--primary); font-weight: 600;
+}
+
+/* ---- 响应式 ---- */
+@media (max-width: 900px) {
+  .main-container { flex-direction: column; }
+  .input-panel { max-width: 100%; min-width: auto; }
+  .result-panel { min-width: auto; }
+  .input-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 500px) {
+  .input-grid { grid-template-columns: 1fr; }
+  .comparison-grid { grid-template-columns: 1fr; }
+  .topbar-inner { flex-wrap: wrap; }
+  .subtitle { display: none; }
+}
+
+/* 风险等级色彩标记 */
+.risk-low { background: var(--success-light); border: 1px solid #bbf7d0; }
+.risk-moderate { background: var(--warning-light); border: 1px solid #fde68a; }
+.risk-high { background: #fff7ed; border: 1px solid #fed7aa; }
+.risk-critical { background: var(--danger-light); border: 1px solid #fecaca; }

@@ -1,0 +1,37 @@
+{
+  "feature_names": {
+    "static": [
+      "Age",
+      "Gender",
+      "BMI",
+      "Emergency",
+      "Charlson",
+      "SOFA_baseline",
+      "SBP_baseline",
+      "HR_baseline",
+      "Temp_baseline"
+    ],
+    "vital_names": [
+      "HR",
+      "SBP",
+      "DBP",
+      "RR",
+      "SpO2",
+      "Temp",
+      "GCS",
+      "Urine",
+      "Lactate",
+      "pH"
+    ]
+  },
+  "feature_dims": 19,
+  "thresholds": {
+    "screening": 0.2,
+    "balanced": 0.5,
+    "precise": 0.75
+  },
+  "performance": {
+    "auroc": 0.817,
+    "auprc": 0.45
+  }
+}
